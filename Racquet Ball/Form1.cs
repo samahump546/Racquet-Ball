@@ -169,17 +169,20 @@ namespace Racquet_Ball
 
             //check if ball hits either player. If it does change the direction 
             //and place the ball in front of the player hit 
-            if (player1.IntersectsWith(ball))
+            if (ballXSpeed < 0)
             {
-                playerTurn = 1;
-                ballXSpeed *= -1;
-                ball.X = player1.X + ball.Width;
-            }
-            else if (player2.IntersectsWith(ball))
-            {
-                playerTurn = 2;
-                ballXSpeed *= -1;
-                ball.X = player2.X + ball.Width;
+                if (player1.IntersectsWith(ball) && playerTurn == 1)
+                {
+                    playerTurn = 2;
+                    ballXSpeed *= -1;
+                    ball.X = player1.X + ball.Width;
+                }
+                else if (player2.IntersectsWith(ball) && playerTurn == 2)
+                {
+                    playerTurn = 1;
+                    ballXSpeed *= -1;
+                    ball.X = player2.X + ball.Width;
+                }
             }
            
             //check if a player missed the ball and if true add 1 to score of other player  
